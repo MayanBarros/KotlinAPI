@@ -22,15 +22,9 @@ data class Address (
     @Column(name = "number", nullable = false)
     val number: String,
 
-    @Column(name = "zip_postal", nullable = false)
-    val zipPostal: String,
-
-    @Column(name = "country", nullable = false)
-    val country: String,
+    @Column(name = "city", nullable = false)
+    val city: String,
 
     @Column(name = "state", nullable = false)
-    val state: String,
-
-    @Column(name = "city", nullable = false)
-    val city: String
+    val state: String
 )
