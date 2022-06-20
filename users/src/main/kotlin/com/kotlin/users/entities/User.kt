@@ -15,7 +15,13 @@ data class User (
     val name: String,
 
     @Column(name = "age", nullable = false)
-    val idade: Int,
+    val age: Int,
+
+    @OneToMany(cascade = [CascadeType.ALL])
+    val address: Set<Address>?,
+
+    @Column(name = "phone_number", nullable = false)
+    val phoneNumber: String,
 
     @Column(name = "email", nullable = false)
     val email: String,
@@ -24,8 +30,5 @@ data class User (
     val password: String,
 
     @Column(name = "is_active", nullable = false)
-    val isActive: Boolean,
-
-    @OneToMany(cascade = [CascadeType.ALL])
-    val address: Set<Address>
+    var isActive: Boolean
     )
