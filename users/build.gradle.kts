@@ -6,7 +6,6 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
-	kotlin("kapt") version "1.6.10"
 }
 
 group = "com.kotlin"
@@ -17,7 +16,6 @@ repositories {
 	mavenCentral()
 }
 
-var mapstructVersion = "1.4.2.Final"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -32,17 +30,9 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
-	compileOnly("org.mapstruct:mapstruct:$mapstructVersion")
-	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
-
-kapt {
-	useBuildCache = true
-	arguments {
-		arg("mapstruct.defaultComponentModel", "spring")
-	}
 }
 
 tasks.withType<KotlinCompile> {
