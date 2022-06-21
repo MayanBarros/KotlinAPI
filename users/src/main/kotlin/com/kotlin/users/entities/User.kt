@@ -1,5 +1,6 @@
 package com.kotlin.users.entities
 
+import org.hibernate.Hibernate
 import javax.persistence.*
 
 @Entity
@@ -18,7 +19,7 @@ data class User (
     val age: Int,
 
     @OneToMany(cascade = [CascadeType.ALL])
-    val address: Set<Address>?,
+    val address: Collection<Address>?,
 
     @Column(name = "phone_number", nullable = false)
     val phoneNumber: String,
@@ -31,4 +32,19 @@ data class User (
 
     @Column(name = "is_active", nullable = false)
     var isActive: Boolean
-    )
+    ) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        other as User
+
+        return id != null && id == other.id
+    }
+
+    override fun hashCode(): Int = javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(id = $id , name = $name , age = $age , phoneNumber = $phoneNumber , email = $email , password = $password , isActive = $isActive )"
+    }
+}
