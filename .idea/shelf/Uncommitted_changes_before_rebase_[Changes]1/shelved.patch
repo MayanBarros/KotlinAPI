@@ -1,0 +1,46 @@
+Index: users/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.datasource:\r\n  url: jdbc:mysql://localhost/kotlin_api?createDatabaseIfNotExist=true\r\n  username: root\r\n  password: kotlinbackend
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/users/src/main/resources/application.yml b/users/src/main/resources/application.yml
+--- a/users/src/main/resources/application.yml	
++++ b/users/src/main/resources/application.yml	
+@@ -1,4 +1,9 @@
+ spring.datasource:
+   url: jdbc:mysql://localhost/kotlin_api?createDatabaseIfNotExist=true
+   username: root
+-  password: kotlinbackend
+\ No newline at end of file
++  password: kotlinbackend
++
++
++spring.mvc:
++    pathmatch:
++      matching-strategy: ant-path-matcher
+\ No newline at end of file
+Index: users/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.jetbrains.kotlin.gradle.tasks.KotlinCompile\r\n\r\nplugins {\r\n\tid(\"org.springframework.boot\") version \"2.7.0\"\r\n\tid(\"io.spring.dependency-management\") version \"1.0.11.RELEASE\"\r\n\tkotlin(\"jvm\") version \"1.6.21\"\r\n\tkotlin(\"plugin.spring\") version \"1.6.21\"\r\n\tkotlin(\"plugin.jpa\") version \"1.6.21\"\r\n\tkotlin(\"kapt\") version \"1.6.10\"\r\n}\r\n\r\ngroup = \"com.kotlin\"\r\nversion = \"0.0.1-SNAPSHOT\"\r\njava.sourceCompatibility = JavaVersion.VERSION_17\r\n\r\nrepositories {\r\n\tmavenCentral()\r\n}\r\n\r\nvar mapstructVersion = \"1.4.2.Final\"\r\n\r\ndependencies {\r\n\timplementation(\"org.springframework.boot:spring-boot-starter-data-jpa\")\r\n\timplementation(\"org.springframework.boot:spring-boot-starter-web\")\r\n\timplementation(\"org.springframework.boot:spring-boot-starter-validation\")\r\n\timplementation(\"com.fasterxml.jackson.module:jackson-module-kotlin\")\r\n\timplementation(\"org.flywaydb:flyway-mysql\")\r\n\timplementation(\"org.jetbrains.kotlin:kotlin-reflect\")\r\n\timplementation(\"org.jetbrains.kotlin:kotlin-stdlib-jdk8\")\r\n//\timplementation(\"io.springfox:springfox-boot-starter\")\r\n\tcompileOnly(\"org.mapstruct:mapstruct:$mapstructVersion\")\r\n\tkapt(\"org.mapstruct:mapstruct-processor:$mapstructVersion\")\r\n\truntimeOnly(\"mysql:mysql-connector-java\")\r\n\ttestImplementation(\"org.springframework.boot:spring-boot-starter-test\")\r\n}\r\n\r\nkapt {\r\n\tuseBuildCache = true\r\n\targuments {\r\n\t\targ(\"mapstruct.defaultComponentModel\", \"spring\")\r\n\t}\r\n}\r\n\r\ntasks.withType<KotlinCompile> {\r\n\tkotlinOptions {\r\n\t\tfreeCompilerArgs = listOf(\"-Xjsr305=strict\")\r\n\t\tjvmTarget = \"17\"\r\n\t}\r\n}\r\n\r\ntasks.withType<Test> {\r\n\tuseJUnitPlatform()\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/users/build.gradle.kts b/users/build.gradle.kts
+--- a/users/build.gradle.kts	
++++ b/users/build.gradle.kts	
+@@ -27,7 +27,11 @@
+ 	implementation("org.flywaydb:flyway-mysql")
+ 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+ 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+-//	implementation("io.springfox:springfox-boot-starter")
++
++	// Swagger
++	implementation("io.springfox:springfox-swagger2:2.9.2")
++	implementation("io.springfox:springfox-swagger-ui:2.9.2")
++
+ 	compileOnly("org.mapstruct:mapstruct:$mapstructVersion")
+ 	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+ 	runtimeOnly("mysql:mysql-connector-java")

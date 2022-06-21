@@ -1,0 +1,45 @@
+Index: users/src/main/kotlin/com/kotlin/users/configuration/SwaggerConfig.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.kotlin.users.configuration;\r\n\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport springfox.documentation.spi.DocumentationType;\r\nimport springfox.documentation.spring.web.plugins.Docket;\r\nimport springfox.documentation.swagger2.annotations.EnableSwagger2;\r\n\r\n@Configuration\r\n@EnableSwagger2\r\npublic class SwaggerConfig {\r\n\r\n    @Bean\r\n    fun api(): Docket = Docket(DocumentationType.SWAGGER_2)\r\n}\r\n
+===================================================================
+diff --git a/users/src/main/kotlin/com/kotlin/users/configuration/SwaggerConfig.kt b/users/src/main/kotlin/com/kotlin/users/configuration/SwaggerConfig.kt
+--- a/users/src/main/kotlin/com/kotlin/users/configuration/SwaggerConfig.kt	
++++ b/users/src/main/kotlin/com/kotlin/users/configuration/SwaggerConfig.kt	
+@@ -1,15 +1,29 @@
+ package com.kotlin.users.configuration;
+ 
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-import springfox.documentation.spi.DocumentationType;
+-import springfox.documentation.spring.web.plugins.Docket;
+-import springfox.documentation.swagger2.annotations.EnableSwagger2;
++import org.springframework.context.annotation.Bean
++import org.springframework.context.annotation.Configuration
++import springfox.documentation.builders.ApiInfoBuilder
++import springfox.documentation.builders.PathSelectors
++import springfox.documentation.builders.RequestHandlerSelectors
++import springfox.documentation.spi.DocumentationType
++import springfox.documentation.spring.web.plugins.Docket
++import springfox.documentation.swagger2.annotations.EnableSwagger2
+ 
+ @Configuration
+ @EnableSwagger2
+-public class SwaggerConfig {
++class SwaggerConfig {
+ 
+     @Bean
+-    fun api(): Docket = Docket(DocumentationType.SWAGGER_2)
++    fun api() : Docket =  Docket(DocumentationType.SWAGGER_2)
++        .select()
++        .apis((RequestHandlerSelectors.basePackage("com.kotlin.users.controllers")))
++        .paths(PathSelectors.any())
++        .build()
++
++        .apiInfo(
++            ApiInfoBuilder()
++                .title("Users")
++                .description("API Users")
++                .build())
++
+ }
