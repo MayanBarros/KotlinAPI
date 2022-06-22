@@ -1,20 +1,30 @@
 package com.kotlin.users.dto.request
 
 import com.kotlin.users.entities.Address
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 class AddressRequestDTO (
 
-    @NotNull
+    @field:NotNull
+    @field:NotEmpty
+    @field:NotBlank
     val address: String,
 
-    @NotNull
+    @field:NotNull
+    @field:NotEmpty
+    @field:NotBlank
     val number: String,
 
-    @NotNull
+    @field:NotNull
+    @field:NotEmpty
+    @field:NotBlank
     val city: String,
 
-    @NotNull
+    @field:NotNull
+    @field:NotEmpty
+    @field:NotBlank
     val state: String
     ) {
 

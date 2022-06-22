@@ -1,6 +1,7 @@
 package com.kotlin.users.controllers;
 
 import com.kotlin.users.dto.request.UserRequestDTO
+import com.kotlin.users.entities.User
 import com.kotlin.users.services.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,8 +24,8 @@ class UserController (
     }
 
     @GetMapping("{id}")
-    fun getUserById(@PathVariable id: Long) {
-        ResponseEntity.ok(userService.findById(id))
+    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
+        return ResponseEntity.ok(userService.findById(id))
     }
 
     @PatchMapping("{id}/deactivate")

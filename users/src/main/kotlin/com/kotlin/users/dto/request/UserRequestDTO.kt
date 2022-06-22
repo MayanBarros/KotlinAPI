@@ -6,39 +6,40 @@ import javax.validation.constraints.*
 
 class UserRequestDTO (
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
-    @Size(min = 3)
+    @field:NotBlank
+    @field:NotNull
+    @field:NotEmpty
+    @field:Size(min = 3)
     val name: String,
 
-    @Min(18)
-    @NotNull
-    @Positive
+    @field:Min(18)
+    @field:NotNull
+    @field:Positive
     val age: Int,
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    @Size(min = 12)
+    @field:NotNull
+    @field:NotBlank
+    @field:NotEmpty
+    @field:Size(min = 10)
     val phoneNumber: String,
 
-    @NotBlank
-    @NotEmpty
-    @Size(min = 12, max = 150)
+    @field:NotBlank
+    @field:NotEmpty
+    @field:Size(min = 12, max = 150)
+    @field:Email
     val email: String,
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
-    @Size(min = 8, max = 150)
+    @field:NotBlank
+    @field:NotNull
+    @field:NotEmpty
+    @field:Size(min = 8, max = 150)
     val password: String,
 
-    @NotNull
+    @field:NotNull
     val isActive: Boolean,
 
     @Valid
-    @NotNull
+    @field:NotNull
     val address: Set<AddressRequestDTO>
     ) {
 
