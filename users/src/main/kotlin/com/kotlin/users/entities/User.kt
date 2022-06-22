@@ -1,6 +1,6 @@
 package com.kotlin.users.entities
 
-import com.kotlin.users.enums.Profile
+import com.kotlin.users.enums.Role
 import org.hibernate.Hibernate
 import javax.persistence.*
 
@@ -36,9 +36,9 @@ data class User (
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Profile::class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: Set<Profile> = setOf()
+    var roles: Set<Role> = setOf()
     ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

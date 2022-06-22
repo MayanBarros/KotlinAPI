@@ -1,7 +1,7 @@
 package com.kotlin.users.services
 
 import com.kotlin.users.entities.User
-import com.kotlin.users.enums.Profile
+import com.kotlin.users.enums.Role
 import com.kotlin.users.repositories.UserRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -16,7 +16,7 @@ class UserService(
 
     fun save(user: User): User {
         val customerCopy = user.copy(
-            roles = setOf(Profile.USER),
+            roles = setOf(Role.USER),
             password = bCrypt.encode(user.password)
         )
         return userRepository.save(customerCopy)
