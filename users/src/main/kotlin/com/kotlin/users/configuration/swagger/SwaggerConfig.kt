@@ -1,4 +1,4 @@
-package com.kotlin.users.configuration
+package com.kotlin.users.configuration.swagger
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
