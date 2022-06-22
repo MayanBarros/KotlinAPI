@@ -1,5 +1,6 @@
 package com.kotlin.users.entities
 
+import com.kotlin.users.enums.Profile
 import org.hibernate.Hibernate
 import javax.persistence.*
 
@@ -31,7 +32,13 @@ data class User (
     val password: String,
 
     @Column(name = "is_active", nullable = false)
-    var isActive: Boolean
+    var isActive: Boolean,
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Profile::class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
+    var roles: Set<Profile> = setOf()
     ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -45,6 +52,6 @@ data class User (
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , name = $name , age = $age , phoneNumber = $phoneNumber , email = $email , password = $password , isActive = $isActive )"
+        return this::class.simpleName + "(id = $id , name = $name , age = $age , phoneNumber = $phoneNumber , email = $email , password = $password , isActive = $isActive , roles = $roles )"
     }
 }
