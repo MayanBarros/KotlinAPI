@@ -1,6 +1,7 @@
 package com.kotlin.users.services
 
 import com.kotlin.users.entities.User
+import com.kotlin.users.enums.Profile
 import com.kotlin.users.repositories.UserRepository
 import org.springframework.stereotype.Service
 
@@ -11,7 +12,12 @@ class UserService(
 
     fun getAll(): List<User> = userRepository.findAll()
 
-    fun save(user: User): User = userRepository.save(user)
+    fun save(user: User): User {
+        val customerCopy = user.copy(
+            roles = setOf(Profile.USER)
+        )
+        return userRepository.save(customerCopy)
+    }
 
     fun findById(id: Long): User? = userRepository.findById(id).orElseThrow()
 

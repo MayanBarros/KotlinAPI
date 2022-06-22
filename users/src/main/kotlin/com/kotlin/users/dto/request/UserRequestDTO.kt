@@ -40,7 +40,7 @@ class UserRequestDTO (
 
     @Valid
     @field:NotNull
-    val address: Set<AddressRequestDTO>
+    val address: Collection<AddressRequestDTO>
     ) {
 
     fun toEntity(): User {
