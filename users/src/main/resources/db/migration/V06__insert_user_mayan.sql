@@ -1,0 +1,1 @@
+INSERT INTO `tb_user` (`id_user`, `name`, `age`, `phone_number`, `email`, `password`, `is_active`) VALUES (1, 'Mayan Barros da Silva', 19, '11974469253', 'mayan.silva@gft.com', '$2a$10$XjEBii/qzJC1WjBE2IuxLuJpXxjeQ0d8aTI1yRwqJTU2esbYeDLZO', b'1');
