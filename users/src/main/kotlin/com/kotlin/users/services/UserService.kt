@@ -1,7 +1,9 @@
 package com.kotlin.users.services
 
 import com.kotlin.users.entities.User
+import com.kotlin.users.enums.Errors
 import com.kotlin.users.enums.Role
+import com.kotlin.users.exceptions.NotFoundException
 import com.kotlin.users.repositories.UserRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -22,7 +24,7 @@ class UserService(
         return userRepository.save(customerCopy)
     }
 
-    fun findById(id: Long): User? = userRepository.findById(id).orElseThrow()
+    fun findById(id: Long): User? = userRepository.findById(id).orElseThrow { NotFoundException(Errors.API1001.message.format(id), Errors.API1001.code) }
 
     fun deactivateUser(id: Long): User {
         val user = findById(id)
